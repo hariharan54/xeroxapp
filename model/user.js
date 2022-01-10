@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const { sequelize } = require("../db/connect");
 
 
-const customers = sequelize.define("series", {
+const customers = sequelize.define("customers", {
   email_id: {
     type: DataTypes.STRING,
         allowNull:false,
