@@ -1,11 +1,12 @@
-const { authenticateUser, signJWT } = require("../services/authService");
 const { validationResult } = require("express-validator");
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
+const customers = require("../model/user")
+const store = require("../model/admin")
 
 
 
-exports.authenticateUser = async (credentials) => {
+const authenticateUser = async (credentials) => {
     try {
       const customer = await customers.findOne({ email_id: credentials.email_id});
       if (!customer) {
@@ -22,7 +23,7 @@ exports.authenticateUser = async (credentials) => {
     }
   };
 
-  exports.authenticateStore = async (credentials) => {
+  const authenticateStore = async (credentials) => {
     try {
       const store_details = await store.findOne({ store_id: credentials.store_id });
       if (!store_details) {
@@ -39,10 +40,10 @@ exports.authenticateUser = async (credentials) => {
     }
   };
   
-  exports.signJWT = async (email) => {
+  const signJWT = async (email) => {
     const payload = {
       user: {
-        email,
+        email_id,
       },
     };
   
@@ -64,7 +65,7 @@ exports.CustomerLogin = async function (req, res) {
       const customer = await authenticateUser({ email_id, password });
       const token = await signJWT(customer.email_id);
       //console.log(token);
-      const customerObj = utils.getCleanUser(customer);
+      const customerObj = await getCleanUser(customer);
       return res.json({ customer: customerObj, token });
     } catch (error) {
       return res.status(401).json({ errors: error });
@@ -138,7 +139,7 @@ exports.CustomerLogin = async function (req, res) {
     }
   };
 
-  exports.CreateCustomer = async (userData) => {
+  const CreateCustomer = async (userData) => {
     try {
       const hashedPassword = await argon2.hash(userData.password);
       userData.password = hashedPassword;
@@ -152,7 +153,7 @@ exports.CustomerLogin = async function (req, res) {
     }
   };
 
-  exports.CreateStore = async (userData) => {
+  const CreateStore = async (userData) => {
     try {
       const hashedPassword = await argon2.hash(userData.password);
       userData.password = hashedPassword;
@@ -165,3 +166,14 @@ exports.CustomerLogin = async function (req, res) {
       throw error;
     }
   };
+
+  async function getCleanUser(user) {
+    if (!user) return null;
+  
+    return {
+      email_id: user.email_id,
+        password: user.password,
+        customer_name: user.customer_name
+    };
+  }
+  
