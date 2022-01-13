@@ -23,11 +23,3 @@ exports.newOrder = async (req,res) =>{
     printOrder= await printOrder.save()
     return res.send(printOrder);
 }
-
-exports.payment = async (req,res) =>{
-    const paymentData = req.body;
-    if(!paymentData){ res.status(402).json({ errors: "No order details entered" });}
-    const paymentDetails = new customers(paymentData);
-    paymentDetails= await paymentDetails.save()
-    return res.send(paymentDetails);
-}
