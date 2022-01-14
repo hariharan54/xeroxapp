@@ -89,7 +89,6 @@ exports.CustomerLogin = async function (req, res) {
         password,
         customer_name
       });
-      delete createdCustomer.password;
       return res.send(createdCustomer);
     } catch (error) {
       res.status(402).json({ errors: error });
@@ -132,7 +131,6 @@ exports.CustomerLogin = async function (req, res) {
       store_address,
       admin_password
       });
-      delete createdStore.password;
       return res.send(createdStore);
     } catch (error) {
       res.status(402).json({ errors: error });
