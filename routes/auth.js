@@ -85,7 +85,40 @@ router.get("/storeconfirmpayment/:printid/:storeid", async function (req, res) {
 
 })
 
+router.get("/storedeliveredorder/:printid/:storeid", async function (req, res) {
+    const print_id = req.params.printid;
+    const storeid = req.params.storeid;
+    // console.log(print_id);
+    // console.log(store_id);
+    // console.log(print_id)
+    // res.send(print_id);
+    const updating1 = await sequelize.query(
+        'UPDATE payments SET payment_status="confirmed" WHERE print_id=?',
+        {
+            replacements: [print_id],
+            type: QueryTypes.UPDATE,
+        }
+    );
+    const updating2 = await sequelize.query(
+        'UPDATE printouts SET print_status="delivered" WHERE print_id=?',
+        {
+            replacements: [print_id],
+            type: QueryTypes.UPDATE,
+        }
+    );
+    const customerorders = await sequelize.query(
+        'select c.customer_name,p.print_status,p.print_id from printouts p,customers c where p.store_id=? AND p.customer_user_id=c.email_id',
+        {
+            replacements: [storeid],
+            type: QueryTypes.SELECT,
+        }
+    );
 
+    // console.log(orderdetails)
+    res.render("store/dashboard", { customerorders })
+
+
+})
 
 
 router.post("/updatepayment", user_dash.updatePayment)
