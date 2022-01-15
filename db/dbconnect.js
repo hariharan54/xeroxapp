@@ -20,6 +20,8 @@ const sequelize = new Sequelize(
   // }
 );
 
+// sequelize.sync({ force: false, alter: true })
+
 //function to check mysql connection
 const checkConnection = async () => {
   try {
@@ -29,6 +31,9 @@ const checkConnection = async () => {
     console.error("Unable to connect to the database:", error);
   }
 };
+
+
 checkConnection();
+
 
 module.exports = {sequelize};

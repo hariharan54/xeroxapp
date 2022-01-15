@@ -1,6 +1,6 @@
-const store = require("../model/admin");
-const printouts = require("../model/printout")
-const customers = require("../model/user")
+const store = require("../model/store");
+const printouts = require("../model/printouts")
+const customers = require("../model/customers")
 
 
 exports.userOrders = async (req,res,userData) =>{
@@ -19,13 +19,14 @@ exports.userOrders = async (req,res,userData) =>{
 
 exports.newOrder = async (req,res) =>{
     const orderData = req.body;
-    if(!orderData){ res.status(402).json({ errors: "No order details entered" });}
-    const storeData = await store.findOne({where:{
-        store_name:orderData.store_name
-    }})
-    delete orderData.store_name
-    orderData["store_id"]=storeData.store_id;
-    const printOrder = new printouts(orderData);
-    printOrder= await printOrder.save()
-    res.send(printOrder);
+    res.send(orderData);
+    // if(!orderData){ res.status(402).json({ errors: "No order details entered" });}
+    // const storeData = await store.findOne({where:{
+    //     store_name:orderData.store_name
+    // }})
+    // delete orderData.store_name
+    // orderData["store_id"]=storeData.store_id;
+    // const printOrder = new printouts(orderData);
+    // printOrder= await printOrder.save()
+    // res.send(printOrder);
 }

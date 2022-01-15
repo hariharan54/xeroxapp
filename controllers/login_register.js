@@ -46,7 +46,7 @@ exports.CustomerLogin = async function (req, res) {
       }
       if (await argon2.verify(customer.password, credentials.password)) {
         delete customer.password;
-        return customer;
+        return customer;        
       } else {
         throw "Invalid Password";
       }

@@ -39,5 +39,6 @@ const printouts = sequelize.define("printouts", {
   }
 });
 
-sequelize.sync({force:true})
+// sequelize.sync({force:true})
+sequelize.sync({ force: false})
 module.exports = printouts;

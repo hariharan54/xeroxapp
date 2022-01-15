@@ -43,50 +43,56 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="p-2">
-                                <form class="form-horizontal" action="loginbackend.php" method="POST">
+                                <form class="form-horizontal" action="/auth/createneworder" method="POST">
                                     <div class="mb-3">
-                                        <label for="store" class="form-label">store</label>
+                                        <label for="store_id" class="form-label">store</label>
                                         <br>
-                                        <select name="store" id="store" class="js-example-basic-single form-control" style="width:100%">
-                                            {{#each storeObj}}
-                                            <option value="storeid1">{{this.store_name}}</option>
-                                            {{!-- <option value="storeid2">B</option>
-                                            <option value="storeid3">C</option>
-                                            <option value="storeid4">D</option> --}}
-                                            {{/each}}
+                                        <select name="store_id" id="store_id"
+                                            class="js-example-basic-single form-control" style="width:100%">
+                                            {{!-- {{#each storeObj}} --}}
+                                            {{!-- <option value="{{this.store_id}}">{{this.store_name}}</option> --}}
+                                            <option value="1">A</option>
+                                            <option value="2">B</option>
+                                            <option value="3">C</option>
+                                            <option value="4">D</option>
+                                            {{!-- {{/each}} --}}
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="doclink" class="form-label">Link</label>
-                                        <input type="text" class="form-control" id="doclink" name="doclink"
+                                        <label for="document_link" class="form-label">Link</label>
+                                        <input type="text" class="form-control" id="document_link" name="document_link"
                                             placeholder="Enter the file link" required>
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="copies" class="form-label">No of copies</label>
-                                        <input type="number" class="form-control" id="copies" name="copies" placeholder="Enter no of copies" onkeyup="calculate()">
+                                        <label for="no_of_copies" class="form-label">No of copies</label>
+                                        <input type="number" class="form-control" id="no_of_copies" name="no_of_copies"
+                                            placeholder="Enter no of copies" onkeyup="calculate()">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="pages" class="form-label">No of pages</label>
-                                        <input type="number" class="form-control" id="pages" name="pages" placeholder="Enter no of pages per copy" onkeyup="calculate()">
+                                        <input type="number" class="form-control" id="pages" name="pages"
+                                            placeholder="Enter no of pages per copy" onkeyup="calculate()">
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="comments" class="form-label">Comments</label>
-                                        <textarea class="form-control" id="store_address" name="store_address" placeholder="Enter your comments here" rows="2"
-                                            cols="50"></textarea>
+                                        <textarea class="form-control" id="comments" name="comments"
+                                            placeholder="Enter your comments here" rows="2" cols="50"></textarea>
 
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="pickuptime" class="form-label">Pick up time</label>
-                                        <input type="time" class="form-control" id="pickuptime" name="pickuptime" placeholder="Enter pick up time">
+                                        <label for="pick_up_time" class="form-label">Pick up time</label>
+                                        <input type="time" class="form-control" id="pick_up_time" name="pick_up_time"
+                                            placeholder="Enter pick up time">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="totalcost" class="form-label">Total Cost</label>
-                                        <input type="number" value="0" class="form-control" id="cost" name="cost" disabled required>
+                                        <label for="payment_amount" class="form-label">Total Cost</label>
+                                        <input type="number" class="form-control" id="payment_amount"
+                                            name="payment_amount" readonly required>
                                     </div>
 
 
@@ -132,18 +138,18 @@
         $('.js-example-basic-single').select2();
     });
 
-    function calculate(){
-            let no_of_copies = document.getElementById("copies").value;
-            let no_of_pages = document.getElementById("pages").value;
-            
+    function calculate() {
+        let no_of_copies = document.getElementById("no_of_copies").value;
+        let no_of_pages = document.getElementById("pages").value;
 
-            if (no_of_copies != null && no_of_pages != null) {
-                let cost=no_of_copies * no_of_pages;
-                document.getElementById("cost").value=cost;
 
-            }
+        if (no_of_copies != null && no_of_pages != null) {
+            let cost = no_of_copies * no_of_pages;
+            document.getElementById("payment_amount").value = cost;
+
         }
-    
+    }
+
 
 </script>
 
