@@ -119,8 +119,25 @@ exports.CustomerLogin = async function (req, res) {
     const { store_id, admin_password } = req.body;
     try {
       const storeObj = await authenticateStore({ store_id, admin_password });
-      const token = await signJWT(storeObj.store_id);
-      return res.json({ store: storeObj, token });
+      console.log("yes1");
+      // const token = await signJWT(storeObj.store_id);
+      console.log("yes2");
+      // const storeObj = await getCleanStore(storeObject);
+      console.log("yes3");
+      const storeid = storeObj.store_id;
+      console.log(store_id)
+      console.log("yes4");
+      const customerorders = await sequelize.query(
+        'select c.customer_name,p.print_status,p.print_id from printouts p,customers c where p.store_id=? AND p.customer_user_id=c.email_id',
+        {
+          replacements: [storeid],
+          type: QueryTypes.SELECT,
+        }
+      );
+      console.log("yes5");
+      // console.log(customerorders);
+      res.render('store/dashboard', {storeObj,customerorders});
+      // return res.json({ store: storeObj, token });
     } catch (error) {
       return res.status(401).json({ errors: error });
     }
@@ -157,14 +174,15 @@ exports.CustomerLogin = async function (req, res) {
       admin_password
     } = req.body;
     try {
-      const createdStore = await CreateStore({
+      const storeObj = await CreateStore({
         store_id,
       upi_id,
       store_name,
       store_address,
       admin_password
       });
-      return res.render('store/dashboard',createdStore);
+      console.log(storeObj.store_id);
+      return res.render('store/dashboard',{storeObj});
     } catch (error) {
       res.status(402).json({ errors: error });
     }
@@ -193,4 +211,14 @@ exports.CustomerLogin = async function (req, res) {
         customer_name: user.customer_name
     };
   }
-  
+ 
+async function getCleanStore(store) {
+  if (!store) return null;
+
+  return {
+    store_id: store.store_id,
+    store_name: store.store_name,
+    store_address: user.store_address
+  };
+}
+

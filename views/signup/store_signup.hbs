@@ -20,7 +20,7 @@
     <title>Store Signup</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" onload="loader()">
 
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
@@ -45,33 +45,37 @@
                                 <form class="form-horizontal" action="/auth/store_dash_register" method="POST">
                                     <div class="mb-3">
                                         <label for="store_name" class="form-label">store name</label>
-                                        <input type="text" class="form-control" id="store_name" name="store_name" placeholder="Enter store name">
+                                        <input type="text" class="form-control" id="store_name" name="store_name"
+                                            placeholder="Enter store name">
                                     </div>
                                     <div class="mb-3">
                                         <label for="store_address" class="form-label">store address</label>
                                         <!-- <input type="textarea"  id="store_address" name="store_address" placeholder="Enter store address"> -->
-                                        <textarea style="white-space: pre-wrap;" class="form-control" id="store_address" name="store_address" placeholder="Enter store address" rows="2" cols="50"></textarea>
+                                        <textarea style="white-space: pre-wrap;" class="form-control" id="store_address"
+                                            name="store_address" placeholder="Enter store address" rows="2"
+                                            cols="50"></textarea>
 
                                     </div>
                                     <div class="mb-3">
                                         <label for="upi_id" class="form-label">UPI ID</label>
-                                        <input type="text" class="form-control" id="upi_id" name="upi_id" placeholder="Enter UPI ID">
+                                        <input type="text" class="form-control" id="upi_id" name="upi_id"
+                                            placeholder="Enter UPI ID">
                                     </div>
                                     <div class="mb-3">
-                                      <label for="store_id" class="form-label">Store ID</label>
+                                        <label for="store_id" class="form-label">Store ID</label>
                                         <input type="text" class="form-control" id="store_id" name="store_id"
                                             placeholder="Enter store ID">
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>
                                         <div class="input-group auth-pass-inputgroup">
-                                            <input type="password" name="admin_password" id="password" class="form-control"
-                                                placeholder="Enter password" aria-label="Password"
+                                            <input type="password" name="admin_password" id="password"
+                                                class="form-control" placeholder="Enter password" aria-label="Password"
                                                 aria-describedby="password-addon">
                                         </div>
                                     </div>
 
-                                    
+
 
                                     <div class="mt-3 d-grid">
                                         <button class="btn btn-primary waves-effect waves-light" type="submit">Sign Up
@@ -85,8 +89,8 @@
                     <div class="mt-5 text-center">
 
                         <div>
-                            <p>Already have an account ? <a href="/login/store_login"
-                                    class="fw-medium text-primary"> Signin
+                            <p>Already have an account ? <a href="/login/store_login" class="fw-medium text-primary">
+                                    Signin
                                 </a> </p>
                         </div>
                     </div>
@@ -108,5 +112,12 @@
         crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
+
+<script>
+    function loader() {
+        localStorage.removeItem("store_id");
+    }
+
+</script>
 
 </html>
