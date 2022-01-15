@@ -49,13 +49,9 @@
                                         <br>
                                         <select name="store_id" id="store_id"
                                             class="js-example-basic-single form-control" style="width:100%">
-                                            {{!-- {{#each storeObj}} --}}
-                                            {{!-- <option value="{{this.store_id}}">{{this.store_name}}</option> --}}
-                                            <option value="1">A</option>
-                                            <option value="2">B</option>
-                                            <option value="3">C</option>
-                                            <option value="4">D</option>
-                                            {{!-- {{/each}} --}}
+                                            {{#each storedetails}}
+                                            <option value="{{this.store_id}}">{{this.store_name}}</option>
+                                            {{/each}}
                                         </select>
                                     </div>
                                     <div class="mb-3">

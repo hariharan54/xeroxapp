@@ -14,8 +14,14 @@ router.post("/store_dash_login",login_register.StoreLogin)
 
 router.post("/store_dash_register",login_register.StoreRegister)
 
-router.get("/neworder",(req,res)=>{
-    res.render('user/neworder')
+router.get("/neworder",async function(req,res){
+    const storedetails = await sequelize.query(
+        'SELECT store_id,store_name FROM stores',
+        {
+            type: QueryTypes.SELECT,
+        }
+    );
+    res.render('user/neworder',{storedetails})
 });
 
 router.get("/payment/:printid",async function(req,res){
