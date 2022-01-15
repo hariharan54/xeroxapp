@@ -11,7 +11,7 @@ exports.userOrders = async (req,res,userData) =>{
     if(!orders){
         res.status(402).json({ errors: "No order yet" });
     }
-    return res.send(orders)
+    res.send(orders)
 }catch(err){
     res.status(402).json({ errors: err });
 }
@@ -27,5 +27,5 @@ exports.newOrder = async (req,res) =>{
     orderData["store_id"]=storeData.store_id;
     const printOrder = new printouts(orderData);
     printOrder= await printOrder.save()
-    return res.send(printOrder);
+    res.send(printOrder);
 }

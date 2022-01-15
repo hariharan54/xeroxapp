@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const { sequelize } = require("../db/connect");
+const { sequelize } = require("../db/dbconnect");
 
 
 const printouts = sequelize.define("printouts", {
@@ -30,8 +30,8 @@ const printouts = sequelize.define("printouts", {
       defaultValue:"Take full print out."
   },
   print_status: {
-    type:   DataTypes.ENUM,
-    values: ['Received', 'Processing', 'Done']
+    type:   DataTypes.STRING,
+    allowNull:false
   },
   pick_up_time:{
       type:DataTypes.DATE,
@@ -39,4 +39,5 @@ const printouts = sequelize.define("printouts", {
   }
 });
 
+sequelize.sync({force:true})
 module.exports = printouts;

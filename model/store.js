@@ -1,10 +1,10 @@
 const { DataTypes } = require("sequelize");
-const { sequelize } = require("../db/connect");
+const { sequelize } = require("../db/dbconnect");
 
 
 const store = sequelize.define("store", {
   store_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
         allowNull:false,
         primaryKey: true,
   },
@@ -17,7 +17,7 @@ const store = sequelize.define("store", {
     allowNull: false,
   },
   store_address:{
-      type:DataTypes.TEXT,
+      type:DataTypes.STRING,
       allowNull:false
   },
   admin_password:{
@@ -26,4 +26,5 @@ const store = sequelize.define("store", {
   }
 });
 
+sequelize.sync({force:true})
 module.exports = store;

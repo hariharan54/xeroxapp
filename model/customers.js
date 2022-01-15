@@ -1,11 +1,12 @@
 const { DataTypes } = require("sequelize");
-const { sequelize } = require("../db/connect");
+const { sequelize } = require("../db/dbconnect");
 
 
 const customers = sequelize.define("customers", {
   email_id: {
     type: DataTypes.STRING,
         allowNull:false,
+        isEmail: true,
         primaryKey: true,
   },
   password: {
@@ -18,4 +19,5 @@ const customers = sequelize.define("customers", {
   }
 });
 
+sequelize.sync({force:false})
 module.exports = customers;

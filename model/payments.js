@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const { sequelize } = require("../db/connect");
+const { sequelize } = require("../db/dbconnect");
 
 
 const payments = sequelize.define("payments", {
@@ -23,6 +23,7 @@ const payments = sequelize.define("payments", {
   payment_status: {
     type: DataTypes.STRING,
     allowNull: false,
+    defaultValue:'Done'
   },
   payment_amount: {
     type: DataTypes.FLOAT,
@@ -30,4 +31,5 @@ const payments = sequelize.define("payments", {
   }
 });
 
+sequelize.sync({force:true})
 module.exports = payments;
