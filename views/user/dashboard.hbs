@@ -46,18 +46,20 @@
                         <div class="card-body pt-3">
                             <table class="table table-success table-striped table-hover">
                                 <thead>
-                                    <th>Order ID</th>
-                                    <th>Comments</th>
-                                    <th>Status</th>
-                                    <th>Details</th>
+                                    <th>Store Name</th>
+                                    <th>Print Status</th>
+                                    <th>Amount</th>
+                                    <th>Payment Status</th>
+                                    <th>Pay Now</th>
                                 </thead>
                                 <tbody>
 
                                     {{#each customerorders}}
                                     <tr>
-                                        <td>{{this.print_id}}</td>
-                                        <td>{{this.comments}}</td>
+                                        <td>{{this.store_name}}</td>
                                         <td>{{this.print_status}}</td>
+                                        <td>{{this.payment_amount}}</td>
+                                        <td>{{this.payment_status}}</td>
                                         <td><i class="fas fa-long-arrow-right btn"></i></td>
                                     </tr>
                                     {{/each}}

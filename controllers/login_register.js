@@ -5,7 +5,8 @@ const customers = require("../model/customers");
 const printouts = require("../model/printouts");
 const store = require("../model/store")
 require("dotenv").config({path:'../.env'});
-
+const { QueryTypes } = require('sequelize');
+const { sequelize } = require("../db/dbconnect");
   
   const signJWT = async (email_id) => {
     const payload = {
@@ -34,7 +35,19 @@ exports.CustomerLogin = async function (req, res) {
       //console.log(token);
       const customerObj = await getCleanUser(customer);
       const customerid=customerObj.email_id;
-      const customerorders=await printouts.findAll({where:{customer_user_id:customerid}});
+
+      // const q ="SELECT s.store_name,p.print_status,pay.payment_amount,pay.payment_status from stores s,printouts p,payments pay where p.customer_user_id=\""+customerid+"\" and p.print_id=pay.print_id";
+      // console.log(q);
+      const customerorders = await sequelize.query(
+        'SELECT s.store_name,p.print_status,pay.payment_amount,pay.payment_status from stores s,printouts p,payments pay where p.customer_user_id=? and p.print_id=pay.print_id',
+        // 'SELECT * from printouts',
+        {
+          replacements:[customerid],
+          type: QueryTypes.SELECT,  
+        }
+      );
+
+      console.log(customerorders);
       res.render('user/dashboard',{customerObj,customerorders});
       // return res.json({ customer: customerObj, token });
     } catch (error) {
