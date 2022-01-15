@@ -2,6 +2,8 @@ const store = require("../model/store");
 const printouts = require("../model/printouts")
 const customers = require("../model/customers");
 const payments = require("../model/payments");
+const { QueryTypes } = require('sequelize');
+const { sequelize } = require("../db/dbconnect");
 
 exports.userOrders = async (req,res,userData) =>{
     try{
@@ -43,7 +45,15 @@ exports.newOrder = async (req,res) =>{
     paymentdetails=await paymentdetails.save();
 
     // res.send(paymentdetails);
-    const customerorders = await printouts.findAll({ where: { customer_user_id: email } });
+    const customerorders = await sequelize.query(
+        'SELECT s.store_name,p.print_status,pay.payment_amount,pay.payment_status from stores s,printouts p,payments pay where p.customer_user_id=? and p.print_id=pay.print_id AND s.store_id=p.store_id',
+        // 'SELECT * from printouts',
+        {
+            replacements: [email],
+            type: QueryTypes.SELECT,
+        }
+    );
+
     res.render('user/dashboard', {customerorders});
 
 }

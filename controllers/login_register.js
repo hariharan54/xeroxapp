@@ -35,11 +35,8 @@ exports.CustomerLogin = async function (req, res) {
       //console.log(token);
       const customerObj = await getCleanUser(customer);
       const customerid=customerObj.email_id;
-
-      // const q ="SELECT s.store_name,p.print_status,pay.payment_amount,pay.payment_status from stores s,printouts p,payments pay where p.customer_user_id=\""+customerid+"\" and p.print_id=pay.print_id";
-      // console.log(q);
       const customerorders = await sequelize.query(
-        'SELECT s.store_name,p.print_status,pay.payment_amount,pay.payment_status from stores s,printouts p,payments pay where p.customer_user_id=? and p.print_id=pay.print_id',
+        'SELECT s.store_name,p.print_status,pay.payment_amount,pay.payment_status from stores s,printouts p,payments pay where p.customer_user_id=? and p.print_id=pay.print_id AND s.store_id=p.store_id',
         // 'SELECT * from printouts',
         {
           replacements:[customerid],
@@ -47,7 +44,7 @@ exports.CustomerLogin = async function (req, res) {
         }
       );
 
-      console.log(customerorders);
+      // console.log(customerorders);
       res.render('user/dashboard',{customerObj,customerorders});
       // return res.json({ customer: customerObj, token });
     } catch (error) {
