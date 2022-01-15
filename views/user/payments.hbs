@@ -37,12 +37,13 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="p-2">
-                                    <h5>Order ID:XYZ1234</h5>
-                                    <h5 class="pt-2">Amount: Rs.15</h5>
-                                    <h5 class="pt-2">Pay To: ABC Store</h5>
-                                    <h5 class="pt-2">UPI ID: abc@upi</h5>
-                                    <h5 class="pt-2">Current Status: Unpaid</h5>
-                                    
+                                {{#each orderdetails}}
+                                <h5>Order ID:{{this.print_id}}</h5>
+                                <h5 class="pt-2">Amount:Rs.{{this.payment_amount}}</h5>
+                                <h5 class="pt-2">Pay To: {{this.store_name}}</h5>
+                                <h5 class="pt-2">UPI ID: {{this.upi_id}}</h5>
+                                <h5 class="pt-2">Current Status: {{this.payment_status}}</h5>
+                                {{/each}}
                                 <form class="form-horizontal pt-3" action="loginbackend.php" method="POST">
                                     <div class="mb-3">
                                         <label for="reference" class="form-label">Enter Reference Number:</label>
@@ -50,7 +51,7 @@
                                         <input type="text" class="form-control" id="reference" name="reference"
                                             placeholder="Enter the UPI reference ID(Starts with 2)">
                                     </div>
-                                    
+
                                     <div class="mt-3 d-grid">
                                         <button class="btn btn-primary waves-effect waves-light"
                                             type="submit">Submit</button>

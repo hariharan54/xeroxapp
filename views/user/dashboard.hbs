@@ -49,8 +49,8 @@
                                     <th>Store Name</th>
                                     <th>Print Status</th>
                                     <th>Amount</th>
-                                    <th>Payment Status</th>
-                                    <th>Pay Now</th>
+                                    <th>Payment</th>
+                                    {{!-- <th>Pay Now</th> --}}
                                 </thead>
                                 <tbody>
 
@@ -59,8 +59,8 @@
                                         <td>{{this.store_name}}</td>
                                         <td>{{this.print_status}}</td>
                                         <td>{{this.payment_amount}}</td>
-                                        <td>{{this.payment_status}}</td>
-                                        <td><i class="fas fa-long-arrow-right btn"></i></td>
+                                        <td><a href="/auth/payment/{{this.print_id}}"><i style="color:#2F9FD4"
+                                                    class="fas fa-long-arrow-right btn"></i></a></td>
                                     </tr>
                                     {{/each}}
                                 </tbody>
