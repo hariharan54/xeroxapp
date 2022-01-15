@@ -1,7 +1,8 @@
 // const { validationResult } = require("express-validator");
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
-const customers = require("../model/customers")
+const customers = require("../model/customers");
+const printouts = require("../model/printouts");
 const store = require("../model/store")
 require("dotenv").config({path:'../.env'});
 
@@ -32,7 +33,9 @@ exports.CustomerLogin = async function (req, res) {
       const token = await signJWT(customer.email_id);
       //console.log(token);
       const customerObj = await getCleanUser(customer);
-      res.render('user/dashboard',{customerObj});
+      const customerid=customerObj.email_id;
+      const customerorders=await printouts.findAll({where:{customer_user_id:customerid}});
+      res.render('user/dashboard',{customerObj,customerorders});
       // return res.json({ customer: customerObj, token });
     } catch (error) {
       return res.status(401).json({ errors: error });

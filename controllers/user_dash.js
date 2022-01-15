@@ -28,7 +28,7 @@ exports.newOrder = async (req,res) =>{
     const orderAmt=orderData.payment_amount;
     delete orderData.payment_amount;
 
-    // orderData["customer_user_id"]="r.hariharan54@gmail.com";
+    const email=orderData["customer_user_id"];
     // res.send(orderData);
     // orderData["store_id"]=storeData.store_id;
    
@@ -43,5 +43,7 @@ exports.newOrder = async (req,res) =>{
     paymentdetails=await paymentdetails.save();
 
     // res.send(paymentdetails);
-    res.render('user/dashboard');
+    const customerorders = await printouts.findAll({ where: { customer_user_id: email } });
+    res.render('user/dashboard', {customerorders});
+
 }

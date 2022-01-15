@@ -46,31 +46,21 @@
                         <div class="card-body pt-3">
                             <table class="table table-success table-striped table-hover">
                                 <thead>
-                                    <th>Store</th>
-                                    <th>No of Pages</th>
+                                    <th>Order ID</th>
+                                    <th>Comments</th>
                                     <th>Status</th>
                                     <th>Details</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>ABC Store</td>
-                                        <td>5</td>
-                                        <td>Payment Pending</td>
-                                        <td><i class="fas fa-long-arrow-right btn"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>DEF Store</td>
-                                        <td>25</td>
-                                        <td>Under Process</td>
-                                        <td><i class="fas fa-long-arrow-right btn"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td>ABC Store</td>
-                                        <td>18</td>
-                                        <td>Delivered</td>
-                                        <td><i class="fas fa-long-arrow-right btn"></i></td>
-                                    </tr>
 
+                                    {{#each customerorders}}
+                                    <tr>
+                                        <td>{{this.print_id}}</td>
+                                        <td>{{this.comments}}</td>
+                                        <td>{{this.print_status}}</td>
+                                        <td><i class="fas fa-long-arrow-right btn"></i></td>
+                                    </tr>
+                                    {{/each}}
                                 </tbody>
                             </table>
 
