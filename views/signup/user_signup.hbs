@@ -20,7 +20,7 @@
     <title>User Signup</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" onload="loader()">
 
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
@@ -45,7 +45,8 @@
                                 <form class="form-horizontal" action="/auth/user_dash_register" method="POST">
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" name="customer_name" placeholder="Enter your name">
+                                        <input type="text" class="form-control" id="name" name="customer_name"
+                                            placeholder="Enter your name">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">email</label>
@@ -70,7 +71,8 @@
                                     </div>
 
                                     <div class="mt-3 d-grid">
-                                        <button class="btn btn-primary waves-effect waves-light" type="submit">Signup</button>
+                                        <button class="btn btn-primary waves-effect waves-light"
+                                            type="submit">Signup</button>
                                     </div>
                                 </form>
                             </div>
@@ -80,8 +82,8 @@
                     <div class="mt-5 text-center">
 
                         <div>
-                            <p>Already have an account ? <a href="/login/user_login"
-                                    class="fw-medium text-primary"> Signin
+                            <p>Already have an account ? <a href="/login/user_login" class="fw-medium text-primary">
+                                    Signin
                                 </a> </p>
 
                         </div>
@@ -104,5 +106,14 @@
         crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
+
+<script>
+    function loader() {
+        localStorage.removeItem("cust_email");
+    }
+
+
+</script>
+
 
 </html>

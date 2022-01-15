@@ -20,7 +20,7 @@
     <title>User Login</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" onload="loader()">
 
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
@@ -36,8 +36,7 @@
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
-                                    <img src="../assets/home_page_img.jpg"
-                                        alt="" class="img-fluid">
+                                    <img src="../assets/home_page_img.jpg" alt="" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -78,9 +77,10 @@
                     <div class="mt-5 text-center">
 
                         <div>
-                            <p>Don't have an account ? <a href="/register/user_register" class="fw-medium text-primary"> Signup now
+                            <p>Don't have an account ? <a href="/register/user_register" class="fw-medium text-primary">
+                                    Signup now
                                 </a> </p>
-                            
+
                         </div>
                     </div>
 
@@ -101,5 +101,10 @@
         crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
+<script>
+    function loader() {
+        localStorage.removeItem("cust_email");
+    }
+</script>
 
 </html>

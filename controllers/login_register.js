@@ -32,7 +32,7 @@ exports.CustomerLogin = async function (req, res) {
       const token = await signJWT(customer.email_id);
       //console.log(token);
       const customerObj = await getCleanUser(customer);
-      res.render('user/dashboard',customerObj);
+      res.render('user/dashboard',{customerObj});
       // return res.json({ customer: customerObj, token });
     } catch (error) {
       return res.status(401).json({ errors: error });
@@ -68,12 +68,12 @@ exports.CustomerLogin = async function (req, res) {
       customer_name
     } = req.body;
     try {
-      const createdCustomer = await CreateCustomer({
+      const customerObj = await CreateCustomer({
         email_id,
         password,
         customer_name
       });
-       res.render('user/dashboard',createdCustomer); // this is used to render the user dashboard similarly for other renders as well
+       res.render('user/dashboard',{customerObj}); // this is used to render the user dashboard similarly for other renders as well
     } catch (error) {
       res.status(402).json({ errors: error });
     }

@@ -3,7 +3,6 @@ const printouts = require("../model/printouts")
 const customers = require("../model/customers");
 const payments = require("../model/payments");
 
-
 exports.userOrders = async (req,res,userData) =>{
     try{
     const orders = await printouts.findAll({ where: {
@@ -29,7 +28,7 @@ exports.newOrder = async (req,res) =>{
     const orderAmt=orderData.payment_amount;
     delete orderData.payment_amount;
 
-    orderData["customer_user_id"]="r.hariharan54@gmail.com";
+    // orderData["customer_user_id"]="r.hariharan54@gmail.com";
     // res.send(orderData);
     // orderData["store_id"]=storeData.store_id;
    
@@ -43,5 +42,6 @@ exports.newOrder = async (req,res) =>{
     })
     paymentdetails=await paymentdetails.save();
 
-    res.send(paymentdetails);
+    // res.send(paymentdetails);
+    res.render('user/dashboard');
 }

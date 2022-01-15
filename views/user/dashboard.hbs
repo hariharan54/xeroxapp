@@ -28,7 +28,7 @@
     <title>User Dashboard</title>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" onload="loadlocalstorage('{{customerObj.email_id}}')">
 
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
@@ -39,6 +39,7 @@
                             <div class="row">
                                 <div class="col-12 pt-3">
                                     <h2 align="center">Dashboard</h2>
+                                    {{!-- <h2 align="center">{{customerObj.email_id}}</h2> --}}
                                 </div>
                             </div>
                         </div>
@@ -97,5 +98,20 @@
         crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
+
+<script>
+    function loadlocalstorage(email) {
+        console.log(email);
+        if (email == "") {
+            console.log("email empty");
+            return;
+        }
+        if (localStorage.getItem("cust_email") === null) {
+            localStorage.setItem("cust_email", email);
+        }
+
+    }
+
+</script>
 
 </html>
