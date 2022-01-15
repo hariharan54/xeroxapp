@@ -7,7 +7,7 @@ const payments = sequelize.define("payments", {
     type: DataTypes.INTEGER,
         allowNull:false,
         primaryKey: true,
-    autoIncrement: true,
+        autoIncrement: true,
   },
   print_id: {
     type: DataTypes.INTEGER,
@@ -16,6 +16,7 @@ const payments = sequelize.define("payments", {
   payment_method: {
     type: DataTypes.STRING,
     allowNull: false,
+    defaultValue:"UPI"
   },
   payment_reference: {
     type: DataTypes.STRING,
@@ -24,7 +25,7 @@ const payments = sequelize.define("payments", {
   payment_status: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue:'Done'
+    defaultValue:'Pending'
   },
   payment_amount: {
     type: DataTypes.FLOAT,

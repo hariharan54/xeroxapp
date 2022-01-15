@@ -1,6 +1,7 @@
 const store = require("../model/store");
 const printouts = require("../model/printouts")
-const customers = require("../model/customers")
+const customers = require("../model/customers");
+const payments = require("../model/payments");
 
 
 exports.userOrders = async (req,res,userData) =>{
@@ -31,7 +32,16 @@ exports.newOrder = async (req,res) =>{
     orderData["customer_user_id"]="r.hariharan54@gmail.com";
     // res.send(orderData);
     // orderData["store_id"]=storeData.store_id;
+   
     let printOrder = new printouts(orderData);
     printOrder= await printOrder.save()
-    res.send(printOrder);
+    let print_id=printOrder.print_id;
+
+    let paymentdetails = new payments({
+        "print_id":print_id,
+        "payment_amount": orderAmt,
+    })
+    paymentdetails=await paymentdetails.save();
+
+    res.send(paymentdetails);
 }
