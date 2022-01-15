@@ -7,6 +7,7 @@ const printouts = sequelize.define("printouts", {
     type: DataTypes.INTEGER,
         allowNull:false,
         primaryKey: true,
+        autoIncrement: true,
   },
   store_id: {
     type: DataTypes.INTEGER,
@@ -31,7 +32,8 @@ const printouts = sequelize.define("printouts", {
   },
   print_status: {
     type:   DataTypes.STRING,
-    allowNull:false
+    allowNull:false,
+    defaultValue: "Order Received."
   },
   pick_up_time:{
       type:DataTypes.DATE,

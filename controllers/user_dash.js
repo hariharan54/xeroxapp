@@ -19,14 +19,19 @@ exports.userOrders = async (req,res,userData) =>{
 
 exports.newOrder = async (req,res) =>{
     const orderData = req.body;
-    res.send(orderData);
-    // if(!orderData){ res.status(402).json({ errors: "No order details entered" });}
+    // res.send(orderData);
+    if(!orderData){ res.status(402).json({ errors: "No order details entered" });}
+    
     // const storeData = await store.findOne({where:{
-    //     store_name:orderData.store_name
+        // store_name:orderData.store_name
     // }})
-    // delete orderData.store_name
+    const orderAmt=orderData.payment_amount;
+    delete orderData.payment_amount;
+
+    orderData["customer_user_id"]="r.hariharan54@gmail.com";
+    // res.send(orderData);
     // orderData["store_id"]=storeData.store_id;
-    // const printOrder = new printouts(orderData);
-    // printOrder= await printOrder.save()
-    // res.send(printOrder);
+    let printOrder = new printouts(orderData);
+    printOrder= await printOrder.save()
+    res.send(printOrder);
 }
