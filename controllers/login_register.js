@@ -128,7 +128,7 @@ exports.CustomerLogin = async function (req, res) {
       console.log(store_id)
       console.log("yes4");
       const customerorders = await sequelize.query(
-        'select c.customer_name,p.print_status,p.print_id from printouts p,customers c where p.store_id=? AND p.customer_user_id=c.email_id',
+        'select c.customer_name,p.print_status,p.print_id,p.store_id from printouts p,customers c where p.store_id=? AND p.customer_user_id=c.email_id',
         {
           replacements: [storeid],
           type: QueryTypes.SELECT,

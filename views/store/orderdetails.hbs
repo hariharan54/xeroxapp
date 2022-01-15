@@ -37,19 +37,25 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="p-2">
-                                <h5>Order ID:XYZ1234</h5>
-                                <h5 class="pt-2">No of copies: 1</h5>
-                                <h5 class="pt-2">Comments: Need from page 10 to 24</h5>
-                                <h5 class="pt-2">File: <a href="./orderdetails.html">Click here</a></h5>
-                                <h5 class="pt-2">Amount:Rs.15</h5>
-                                <h5 class="pt-2">Status:Confirmation pending <a href="./orderdetails.html">Confirm</a></h5>
-                                <h5 class="pt-2">Payment ID: 2033333333333</h5>
+                                {{#each orderdetails}}
+                                <h5>Order ID:{{this.print_id}}</h5>
+                                <h5 class="pt-2">No of copies: {{this.no_of_copies}}</h5>
+                                <h5 class="pt-2">Comments: {{this.comments}}</h5>
+                                <h5 class="pt-2">File: <a target="_blank" href="{{this.document_link}}">Click here</a>
+                                </h5>
+                                <h5 class="pt-2">Amount:Rs.{{this.payment_amount}}</h5>
+                                <h5 class="pt-2">Status: {{this.payment_status}} <a
+                                        href="/auth/storeconfirmpayment/{{this.print_id}}/{{this.store_id}}">Confirm
+                                        Payment</a>
+                                </h5>
+                                <h5 class="pt-2">Payment ID: {{this.payment_reference}}</h5>
+                                {{/each}}
 
-                                    <div class="mt-3 d-grid">
-                                        <button class="btn btn-primary waves-effect waves-light"
-                                            type="button">Close</button>
-                                    </div>
-                                
+                                <div class="mt-3 d-grid">
+                                    <button class="btn btn-primary waves-effect waves-light"
+                                        type="button">Close</button>
+                                </div>
+
                             </div>
 
                         </div>
