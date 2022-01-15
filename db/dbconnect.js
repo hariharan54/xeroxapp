@@ -20,7 +20,7 @@ const sequelize = new Sequelize(
   // }
 );
 
-// sequelize.sync({ force: false, alter: true })
+sequelize.sync({ force: false, alter: true })
 
 //function to check mysql connection
 const checkConnection = async () => {

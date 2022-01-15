@@ -26,5 +26,5 @@ const store = sequelize.define("store", {
   }
 });
 
-sequelize.sync({force:true})
+// sequelize.sync({force:true})
 module.exports = store;
