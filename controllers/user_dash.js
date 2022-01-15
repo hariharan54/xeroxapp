@@ -46,7 +46,7 @@ exports.newOrder = async (req,res) =>{
 
     // res.send(paymentdetails);
     const customerorders = await sequelize.query(
-        'SELECT s.store_name,p.print_status,pay.payment_amount,pay.payment_status from stores s,printouts p,payments pay where p.customer_user_id=? and p.print_id=pay.print_id AND s.store_id=p.store_id',
+        'SELECT s.store_name,p.print_status,p.print_id,pay.payment_amount,pay.payment_status from stores s,printouts p,payments pay where p.customer_user_id=? and p.print_id=pay.print_id AND s.store_id=p.store_id',
         // 'SELECT * from printouts',
         {
             replacements: [email],
@@ -55,5 +55,36 @@ exports.newOrder = async (req,res) =>{
     );
 
     res.render('user/dashboard', {customerorders});
+
+}
+
+exports.updatePayment = async (req, res) => {
+    const orderData = req.body;
+    // res.send(req.body);
+    if (!orderData) { res.status(402).json({ errors: "No order details entered" }); }
+    
+    const ref=orderData.reference;
+    const printid = orderData.print_id;
+    const email = orderData.customer_user_id;
+    const updating = await sequelize.query(
+        'UPDATE payments SET payment_reference = ?,payment_status="Awaiting Payment Confirmation" WHERE print_id=?',
+        // 'SELECT * from printouts',
+        {
+            replacements: [ref,printid],
+            type: QueryTypes.INSERT,
+        }
+    );
+    
+
+    const customerorders = await sequelize.query(
+        'SELECT s.store_name,p.print_status,p.print_id,pay.payment_amount,pay.payment_status from stores s,printouts p,payments pay where p.customer_user_id=? and p.print_id=pay.print_id AND s.store_id=p.store_id',
+        // 'SELECT * from printouts',
+        {
+            replacements: [email],
+            type: QueryTypes.SELECT,
+        }
+    );
+
+    res.render('user/dashboard', { customerorders });
 
 }
