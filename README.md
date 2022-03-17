@@ -1,4 +1,4 @@
-# xerox store management app
+# Xerox Store Management App
 
 ### Motivation
 The main motive to build this app was to streamline processes at xerox/printout stores,prevent overcrowding and for quick order completion.
