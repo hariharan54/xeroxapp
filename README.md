@@ -14,8 +14,8 @@ There are two interfaces
   Here the store can login, check the orders and download the attachements and keep them ready for the customer to collect them.
   
 ### Tech Stack Used:
-  Node.js with express
-  MySQL Database
-  Handlebars(with HTML,JS, and bootstrap)
+  Node.js with express  
+  MySQL Database   
+  Handlebars(with HTML,JS, and bootstrap)   
   
 Live App: https://xeroxapp.herokuapp.com
